@@ -27,10 +27,5 @@ import java.util.Map;
             return "main";
         }
 
-
-    @Target(ElementType.TYPE)
-    @Retention(RetentionPolicy.RUNTIME)
-    public @interface GetMapping {
-    }
     }
 
