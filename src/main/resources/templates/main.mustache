@@ -5,25 +5,52 @@
 <div>
     <form method="post" action="text">
 
-        <input type="text" name="text" placeholder="Введите сообщение">
-        <input type="text" name="tag" placeholder="Тэг">
+        <div>Наименование организации  <input type="text" name="nameOrg" placeholder="Введите наименование организации"></div>
+        <div>ИНН  <input type="text" name="inn" placeholder="Введите ИНН организации"></div>
+        <div>ОГРН  <input type="text" name="ogrnn" placeholder="Введите ОГРН организации"></div>
+        <div>Адрес  <input type="text" name="addressOrg" placeholder="Введите адрес организации"></div>
         <button type="submit">Отправить</button>
 
     </form>
 </div>
 
-<div>Список сообщений</div>
+<div>Поиск по таблице</div>
 <form method="post" action="filter">
     <input type="text" name="filter">
     <button type="submit">Найти</button>
 </form>
-{{#messages}}
+
+
+
+<div>Удаление элементов</div>
+<form method="post" action="delete">
+    <input type="text" name="id">
+    <button type="submit">Удалить</button>
+</form>
+
+
+<form method="post" ></form>
+
 <div>
-    <b>{{id}}</b>
-    <span>{{text}}</span>
-    <i>{{tag}}</i>
+    <table border="1">
+        <tr>
+        <th>ID</th>
+        <th>Наименование организации</th>
+        <th>Инн</th>
+        <th>ОГРН</th>
+        <th>Адрес</th>
+        </tr>
+        {{#messages}}
+        <tr>
+            <td>{{id}}</td>
+            <td>{{nameOrg}}</td>
+            <td>{{inn}}</td>
+            <td>{{ogrnn}}</td>
+            <td>{{addressOrg}}</td>
+        </tr>
+        {{/messages}}
+    </table>
 </div>
-{{/messages}}
 
 </body>
 </html>
