@@ -8,19 +8,22 @@ import javax.persistence.Id;
 @Entity
 public class Message {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    private String text;
-    private String tag;
+    private String nameOrg;
+    private String inn;
+    private String ogrnn;
+    private String addressOrg;
 
-    public Message(){
-
+    public Message() {
     }
 
-    public Message(String text, String tag) {
-        this.text = text;
-        this.tag = tag;
+    public Message(String nameOrg, String inn, String ogrnn, String addressOrg) {
+        this.nameOrg = nameOrg;
+        this.inn = inn;
+        this.ogrnn = ogrnn;
+        this.addressOrg = addressOrg;
     }
 
     public Integer getId() {
@@ -31,19 +34,35 @@ public class Message {
         this.id = id;
     }
 
-    public String getText() {
-        return text;
+    public String getNameOrg() {
+        return nameOrg;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setNameOrg(String nameOrg) {
+        this.nameOrg = nameOrg;
     }
 
-    public String getTag() {
-        return tag;
+    public String getInn() {
+        return inn;
     }
 
-    public void setTag(String tag) {
-        this.tag = tag;
+    public void setInn(String inn) {
+        this.inn = inn;
+    }
+
+    public String getOgrnn() {
+        return ogrnn;
+    }
+
+    public void setOgrnn(String ogrnn) {
+        this.ogrnn = ogrnn;
+    }
+
+    public String getAddressOrg() {
+        return addressOrg;
+    }
+
+    public void setAddressOrg(String addressOrg) {
+        this.addressOrg = addressOrg;
     }
 }
