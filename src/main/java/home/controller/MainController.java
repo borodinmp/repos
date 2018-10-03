@@ -1,38 +1,43 @@
-package home;
+package home.controller;
 
 import home.domain.Message;
+import home.domain.User;
 import home.repos.MessageRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
     @Controller
-    public class GreetingController {
+    public class MainController {
 
         @Autowired
         private MessageRepo messageRepo;
 
+/*
         @GetMapping("/")
-        public String greeting(
-            @RequestParam(name="name", required=false, defaultValue="World") String name,
-            Map<String,Object> model) {
-            model.put("name", name);
-            return "greeting.mustache";
+        public String greeting(Map<String,Object> model) {
+                       return "main";
             }
+*/
 
-        @GetMapping("/main")
+        @GetMapping("/")
         public String main(Map<String,Object> model) {
             Iterable<Message> messages = messageRepo.findAll();
             model.put("messages", messages);
             return "main";
             }
 
-        @PostMapping("/main")
-        public String add(@RequestParam String nameOrg, @RequestParam String inn, @RequestParam String ogrnn,
-                          @RequestParam String addressOrg, Map<String,Object> model) {
-            Message message = new Message(nameOrg, inn, ogrnn, addressOrg);
+        @PostMapping("text")
+        public String add(
+                @AuthenticationPrincipal User user,
+                @RequestParam String nameOrg,
+                @RequestParam String inn,
+                @RequestParam String ogrnn,
+                @RequestParam String addressOrg, Map<String,Object> model) {
+            Message message = new Message(nameOrg, inn, ogrnn, addressOrg, user);
             messageRepo.save(message);
 
             Iterable<Message> messages = messageRepo.findAll();
@@ -59,8 +64,9 @@ import java.util.Map;
 
             Iterable<Message> messages;
 
-            messages = messageRepo.deleteById(id);
-            model.remove("messages", messages);
+            messageRepo.deleteById(id);
+            messages = messageRepo.findAll();
+            model.put("messages", messages);
             return "main";
             }
 
