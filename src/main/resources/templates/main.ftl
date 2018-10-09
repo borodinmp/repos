@@ -4,15 +4,17 @@
 
 <div>
 <@l.logout />
+    <span><a href = "/user">User list</a></span>
 </div>
 
 <div>
     <form method="post" action="text">
-        <input type="hidden" name="_csrf" value="${_csrf.token}" />
-        <div>Наименование организации  <input type="text" name="nameOrg" placeholder="Введите наименование организации"></div>
-        <div>ИНН  <input type="text" name="inn" placeholder="Введите ИНН организации"></div>
-        <div>ОГРН  <input type="text" name="ogrnn" placeholder="Введите ОГРН организации"></div>
-        <div>Адрес  <input type="text" name="addressOrg" placeholder="Введите адрес организации"></div>
+        <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+        <div>Наименование организации <input type="text" name="nameOrg" placeholder="Введите наименование организации">
+        </div>
+        <div>ИНН <input type="text" name="inn" placeholder="Введите ИНН организации"></div>
+        <div>ОГРН <input type="text" name="ogrnn" placeholder="Введите ОГРН организации"></div>
+        <div>Адрес <input type="text" name="addressOrg" placeholder="Введите адрес организации"></div>
         <button type="submit">Отправить</button>
     </form>
 </div>
@@ -20,7 +22,7 @@
 <br>
 <div>Поиск по таблице</div>
 <form method="get" action="/main">
-    <select name="orgFilter" >
+    <select name="orgFilter">
         <option value="orgAll">Все поля</option>
         <option value="orgId">ID</option>
         <option value="orgName">Наименование организации</option>
@@ -36,12 +38,12 @@
 <div>
     <table border="1">
         <tr>
-        <th>ID</th>
-        <th>Наименование организации</th>
-        <th>Инн</th>
-        <th>ОГРН</th>
-        <th>Адрес</th>
-        <th>Автор</th>
+            <th>ID</th>
+            <th>Наименование организации</th>
+            <th>Инн</th>
+            <th>ОГРН</th>
+            <th>Адрес</th>
+            <th>Автор</th>
         </tr>
         <#list messages as message>
         <tr>
@@ -61,7 +63,7 @@
 
 <div>Удаление элементов</div>
 <form method="post" action="delete">
-    <input type="hidden" name="_csrf" value="${_csrf.token}" />
+    <input type="hidden" name="_csrf" value="${_csrf.token}"/>
     <input type="text" name="id">
     <button type="submit">Удалить</button>
 </form>
