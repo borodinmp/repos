@@ -1,5 +1,8 @@
 <#import "parts/common.ftl" as c>
+<#include "parts/security.ftl">
+
 <@c.page>
-<div>Hello, user!</div>
-<a href="main">Ссылка на main</a>
+<H5>Hello!</H5>
+<div>This is a web resource for organizations</div>
+
 </@c.page>

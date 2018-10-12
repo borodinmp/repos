@@ -1,42 +1,56 @@
 <#import "parts/common.ftl" as c>
-<#import "parts/login.ftl" as l>
 <@c.page>
 
-<div>
-<@l.logout />
-    <span><a href = "/user">User list</a></span>
+<div class="form-row">
+    <div class="form-group col-md-6">
+        <form method="get" action="/main" class="form-inline">
+            <select name="orgFilter">
+                <option value="orgAll">Все поля</option>
+                <option value="orgId">ID</option>
+                <option value="orgName">Наименование организации</option>
+                <option value="orgInn">ИНН</option>
+                <option value="orgOgrn">ОГРН</option>
+                <option value="orgAddress">Адрес</option>
+            </select>
+            <input type="text" name="filter" value="${filter?ifExists}" placeholder="Search" class="form-control ml-2">
+            <button type="submit" class="btn btn-primary ml-2">Найти</button>
+        </form>
+    </div>
 </div>
 
-<div>
-    <form method="post" action="text">
-        <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-        <div>Наименование организации <input type="text" name="nameOrg" placeholder="Введите наименование организации">
-        </div>
-        <div>ИНН <input type="text" name="inn" placeholder="Введите ИНН организации"></div>
-        <div>ОГРН <input type="text" name="ogrnn" placeholder="Введите ОГРН организации"></div>
-        <div>Адрес <input type="text" name="addressOrg" placeholder="Введите адрес организации"></div>
-        <button type="submit">Отправить</button>
-    </form>
+<a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+    Add new message
+</a>
+<div class="collapse mt-3" id="collapseExample"
+     <div class="form-group">
+         <form method="post" action="text" enctype="multipart/form-data">
+             <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+             <div class="form-group">
+                 Наименование организации<input class="form-control" type="text" name="nameOrg" placeholder="Введите наименование организации">
+             </div>
+             <div class="form-group">
+                 ИНН <input class="form-control" type="text" name="inn" placeholder="Введите ИНН организации">
+             </div>
+             <div class="form-group">
+                 ОГРН <input class="form-control" type="text" name="ogrnn" placeholder="Введите ОГРН организации">
+             </div>
+             <div class="form-group">
+                 Адрес<input class="form-control" type="text" name="addressOrg" placeholder="Введите адрес организации">
+             </div>
+             <div class="custom-file">
+                 <input  type="file" name="file" id = customFile>
+                 <label class="custom-file-label" for="customFile">Choose file</label>
+             </div>
+             <button class="btn btn-primary mt-3" type="submit">Отправить</button>
+         </form>
+     </div>
 </div>
 
 <br>
-<div>Поиск по таблице</div>
-<form method="get" action="/main">
-    <select name="orgFilter">
-        <option value="orgAll">Все поля</option>
-        <option value="orgId">ID</option>
-        <option value="orgName">Наименование организации</option>
-        <option value="orgInn">ИНН</option>
-        <option value="orgOgrn">ОГРН</option>
-        <option value="orgAddress">Адрес</option>
-    </select>
-    <input type="text" name="filter" value="${filter?ifExists}">
-    <button type="submit">Найти</button>
-</form>
-<br>
 
 <div>
-    <table border="1">
+    <table class="table">
+        <thead>
         <tr>
             <th>ID</th>
             <th>Наименование организации</th>
@@ -44,6 +58,9 @@
             <th>ОГРН</th>
             <th>Адрес</th>
             <th>Автор</th>
+            <th>Картинка</th>
+        </thead>
+        <tbody>
         </tr>
         <#list messages as message>
         <tr>
@@ -53,7 +70,12 @@
             <td>${message.ogrnn}</td>
             <td>${message.addressOrg}</td>
             <td>${message.authorName}</td>
+            <td>
+                <#if message.filename??>
+                <img class="img-thumbnail" width="100" height="100" src="/img/${message.filename}"
+            </#if></td>
         </tr>
+        </tbody>
         <#else>
         No message
         </#list>
@@ -62,10 +84,12 @@
 
 
 <div>Удаление элементов</div>
+<div class="form-inline">
 <form method="post" action="delete">
     <input type="hidden" name="_csrf" value="${_csrf.token}"/>
     <input type="text" name="id">
     <button type="submit">Удалить</button>
 </form>
+</div>
 
 </@c.page>
