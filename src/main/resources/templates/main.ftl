@@ -5,12 +5,12 @@
     <div class="form-group col-md-6">
         <form method="get" action="/main" class="form-inline">
             <select name="orgFilter">
-                <option value="orgAll">Все поля</option>
-                <option value="orgId">ID</option>
-                <option value="orgName">Наименование организации</option>
-                <option value="orgInn">ИНН</option>
-                <option value="orgOgrn">ОГРН</option>
-                <option value="orgAddress">Адрес</option>
+                <option name="orgAll" value="1">Все поля</option>
+                <option name="orgId">ID</option>
+                <option name="orgName">Наименование организации</option>
+                <option name="orgInn">ИНН</option>
+                <option name="orgOgrn">ОГРН</option>
+                <option name="orgAddress">Адрес</option>
             </select>
             <input type="text" name="filter" value="${filter?ifExists}" placeholder="Search" class="form-control ml-2">
             <button type="submit" class="btn btn-primary ml-2">Найти</button>
@@ -81,7 +81,6 @@
         </#list>
     </table>
 </div>
-
 
 <div>Удаление элементов</div>
 <div class="form-inline">

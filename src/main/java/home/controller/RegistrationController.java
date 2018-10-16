@@ -49,5 +49,4 @@ public class RegistrationController {
         return "login";
     }
 
-
 }

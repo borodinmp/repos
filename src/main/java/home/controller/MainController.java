@@ -4,23 +4,25 @@ package home.controller;
 import home.domain.Message;
 import home.domain.User;
 import home.repos.MessageRepo;
+import org.hibernate.sql.SelectValues;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
 @Controller
     public class MainController {
+
 
         @Autowired
         private MessageRepo messageRepo;
@@ -34,20 +36,26 @@ import java.util.UUID;
             }
 
         @GetMapping("/main")
-        public String main(@RequestParam(required = false, defaultValue = "") String filter, Model model) {
+        public String main(@RequestParam(required = false, defaultValue = "") String filter,
+                           /*@RequestParam(required = false, defaultValue = "") SelectValues orgFilter,*/
+                           Model model) {
             Iterable<Message> messages = messageRepo.findAll();
 
-            if(filter != null && !filter.isEmpty()) {
+
+            if(filter != null & !filter.isEmpty()/* & orgFilter.equals("orgName")*/) {
 
                 messages = messageRepo.
-                        findByNameOrgLikeOrInnLikeOrOgrnnLikeOrAddressOrgLike(filter,filter,filter,filter);
+                        findByNameOrg(filter);
             } else {
                 messages = messageRepo.findAll();
             }
 
             model.addAttribute("messages", messages);
             model.addAttribute("filter", filter);
+
+
             return "main";
+
             }
 
         @PostMapping("text")
@@ -72,8 +80,6 @@ import java.util.UUID;
                 message.setFilename(resultFilename);
             }
 
-
-
             messageRepo.save(message);
 
             Iterable<Message> messages = messageRepo.findAll();
@@ -83,10 +89,9 @@ import java.util.UUID;
             return "main";
         }
 
-
         @PostMapping("delete")
         @Transactional
-        public String delete(@RequestParam Integer id, Map<String,Object> model) {
+        public String delete(@RequestParam Long id, Map<String,Object> model) {
 
             Iterable<Message> messages;
 
@@ -97,4 +102,3 @@ import java.util.UUID;
             }
 
     }
-
