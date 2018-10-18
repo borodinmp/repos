@@ -1,6 +1,9 @@
 package home.domain;
 
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 public class Message {
@@ -8,9 +11,20 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @NotBlank(message = "Please fill the text")
+    @Length(max = 255, message = "Text is to long")
     private String nameOrg;
+
+    @NotBlank(message = "Please fill the text")
+    @Length(max = 255, message = "Text is to long")
     private String inn;
+
+    @NotBlank(message = "Please fill the text")
+    @Length(max = 255, message = "Text is to long")
     private String ogrnn;
+
+    @NotBlank(message = "Please fill the text")
+    @Length(max = 255, message = "Text is to long")
     private String addressOrg;
 
 

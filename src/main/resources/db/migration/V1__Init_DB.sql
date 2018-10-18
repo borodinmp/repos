@@ -1,4 +1,5 @@
 create table hibernate_sequence (next_val bigint);
+insert into hibernate_sequence (next_val) values (1);
 
 create table message (id bigint not null, address_org varchar(255), filename varchar(255), inn varchar(255),
 name_org varchar(255), ogrnn varchar(255), user_id bigint, primary key (id));
