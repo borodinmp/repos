@@ -27,7 +27,6 @@ public class Message {
     @Length(max = 255, message = "Text is to long")
     private String addressOrg;
 
-
     private String filename;
 
     @ManyToOne(fetch = FetchType.EAGER)

@@ -4,16 +4,15 @@
 <div class="form-row">
     <div class="form-group col-md-6">
         <form method="get" action="/main" class="form-inline">
-            <select name="orgFilter">
+            <select name="selectFilter" class="form-control ml-2" value="${selectFilter?ifExists}">
                 <option name="orgAll" value="1">Все поля</option>
-                <option name="orgId">ID</option>
-                <option name="orgName">Наименование организации</option>
-                <option name="orgInn">ИНН</option>
-                <option name="orgOgrn">ОГРН</option>
-                <option name="orgAddress">Адрес</option>
+                <option name="orgName" value="2">Наименование организации</option>
+                <option name="orgInn" value="3">ИНН</option>
+                <option name="orgOgrn" value="4">ОГРН</option>
+                <option name="orgAddress" value="5">Адрес</option>
             </select>
             <input type="text" name="filter" value="${filter?ifExists}" placeholder="Search" class="form-control ml-2">
-            <button type="submit" class="btn btn-primary ml-2">Найти</button>
+            <button type="submit" class="btn btn-primary">Найти</button>
         </form>
     </div>
 </div>

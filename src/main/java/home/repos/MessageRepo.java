@@ -11,6 +11,14 @@ public interface MessageRepo extends CrudRepository<Message, Long>{
 
     List<Message> findByNameOrg(String nameOrg);
 
+    List<Message> findByInn (String inn);
+
+    List<Message> findByOgrnn (String ogrnn);
+
+    List<Message> findByAddressOrg (String addressOrg);
+
+    List<Message> findById(long id);
+
     List<Message> deleteById(Integer id);
 }
 
